@@ -35,7 +35,7 @@ class AlbumsService {
     const songsQuery = {
       text: `SELECT songs.id, songs.title, songs.performer FROM songs 
       INNER JOIN albums 
-      ON albums.id = songs."albumId" 
+      ON albums.id = songs."album_id"
       WHERE albums.id=$1`,
       values: [id],
     };

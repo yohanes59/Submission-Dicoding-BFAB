@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/server.js",
-    "migrate": "node-pg-migrate"
+    "migrate": "node-pg-migrate",
+    "lint": "eslint ./src"
   },
   "author": "Yohanes Cahyadi",
   "license": "ISC",

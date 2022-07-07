@@ -36,7 +36,6 @@ const init = async () => {
       newResponse.code(response.statusCode);
       return newResponse;
     }
-    // jika bukan ClientError, lanjutkan dengan response sebelumnya (tanpa terintervensi)
     return response.continue || response;
   });
 
