@@ -1,6 +1,7 @@
 class AlbumsHandler {
   constructor(service, validator) {
     this._service = service;
+    this._storageService = this.storageService;
     this._validator = validator;
 
     this.postAlbumHandler = this.postAlbumHandler.bind(this);
@@ -10,6 +11,7 @@ class AlbumsHandler {
 
     this.postAlbumLikeHandler = this.postAlbumLikeHandler.bind(this);
     this.getAlbumLikesHandler = this.getAlbumLikesHandler.bind(this);
+    this.postUploadCoverHandler = this.postUploadCoverHandler.bind(this);
   }
 
   async postAlbumHandler(request, h) {

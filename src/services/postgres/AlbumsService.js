@@ -50,6 +50,7 @@ class AlbumsService {
       id: resultAlbums.rows[0].id,
       name: resultAlbums.rows[0].name,
       year: resultAlbums.rows[0].year,
+      coverUrl: resultAlbums.rows[0].cover,
       songs: resultSongs.rows,
     };
   }
