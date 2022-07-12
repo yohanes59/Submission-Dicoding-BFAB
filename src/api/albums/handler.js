@@ -88,9 +88,7 @@ class AlbumsHandler {
 
     const response = h.response({
       status: 'success',
-      data: {
-        likes: likes.albumLikes,
-      },
+      data: { likes: likes.albumLikes },
     });
     if (likes.source === 'cache') {
       response.header('X-Data-Source', 'cache');
