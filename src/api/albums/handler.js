@@ -7,6 +7,9 @@ class AlbumsHandler {
     this.getAlbumByIdHandler = this.getAlbumByIdHandler.bind(this);
     this.putAlbumByIdHandler = this.putAlbumByIdHandler.bind(this);
     this.deleteAlbumByIdHandler = this.deleteAlbumByIdHandler.bind(this);
+
+    this.postAlbumLikeHandler = this.postAlbumLikeHandler.bind(this);
+    this.getAlbumLikesHandler = this.getAlbumLikesHandler.bind(this);
   }
 
   async postAlbumHandler(request, h) {
@@ -33,7 +36,9 @@ class AlbumsHandler {
         album,
       },
     });
-    response.code(200);
+    if (album.source === 'cache') {
+      response.header('X-Data-Source', 'cache');
+    }
     return response;
   }
 
@@ -59,6 +64,38 @@ class AlbumsHandler {
       message: 'Album berhasil dihapus',
     });
     response.code(200);
+    return response;
+  }
+
+  async postAlbumLikeHandler(request, h) {
+    const { id: credentialId } = request.auth.credentials;
+    const { id: albumId } = request.params;
+
+    const messages = await this._service.postUserAlbumLikeById(credentialId, albumId);
+
+    const response = h.response({
+      status: 'success',
+      message: messages,
+    });
+
+    response.code(201);
+    return response;
+  }
+
+  async getAlbumLikesHandler(request, h) {
+    const { id: albumId } = request.params;
+    const likes = await this._service.getUserAlbumLikesById(albumId);
+
+    const response = h.response({
+      status: 'success',
+      data: {
+        likes: likes.albumLikes,
+      },
+    });
+    if (likes.source === 'cache') {
+      response.header('X-Data-Source', 'cache');
+      return response;
+    }
     return response;
   }
 }
