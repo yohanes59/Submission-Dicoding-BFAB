@@ -1,8 +1,8 @@
 class AlbumsHandler {
-  constructor(service, validator) {
+  constructor(service, validator, storageService) {
     this._service = service;
-    this._storageService = this.storageService;
     this._validator = validator;
+    this._storageService = storageService;
 
     this.postAlbumHandler = this.postAlbumHandler.bind(this);
     this.getAlbumByIdHandler = this.getAlbumByIdHandler.bind(this);
@@ -102,7 +102,7 @@ class AlbumsHandler {
   async postUploadCoverHandler(request, h) {
     const { cover } = request.payload;
     const { id } = request.params;
-    this._validator.validateAlbumCover(cover.hapi.headers);
+    this._validator.validateCoverHeaders(cover.hapi.headers);
 
     const filename = await this._storageService.writeFile(cover, cover.hapi);
     const fileLocation = `http://${process.env.HOST}:${process.env.PORT}/albums/file/covers/${filename}`;

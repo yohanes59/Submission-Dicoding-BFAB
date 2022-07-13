@@ -36,8 +36,7 @@ class AlbumsService {
 
     const songsQuery = {
       text: `SELECT songs.id, songs.title, songs.performer FROM songs 
-      INNER JOIN albums 
-      ON albums.id = songs."album_id"
+      INNER JOIN albums ON albums.id = songs."album_id"
       WHERE albums.id=$1`,
       values: [id],
     };
@@ -133,7 +132,6 @@ class AlbumsService {
       };
 
       const resultAlbum = await this._pool.query(queryAlbum);
-
       if (!resultAlbum.rows.length) {
         throw new NotFoundError('Album tidak ditemukan');
       }
@@ -151,6 +149,17 @@ class AlbumsService {
         source: 'database',
         albumLikes: resultLikesNumber,
       };
+    }
+  }
+
+  async postAlbumCoverById(id, cover) {
+    const query = {
+      text: 'UPDATE albums SET cover = $1 WHERE id = $2',
+      values: [cover, id],
+    };
+    const result = await this._pool.query(query);
+    if (!result.rowCount) {
+      throw new NotFoundError('Gagal memperbarui album. Id tidak ditemukan');
     }
   }
 }

@@ -1,5 +1,5 @@
 exports.up = (pgm) => {
-  pgm.sql('ALTER TABLE albums ADD COLUMN cover VARCHAR(50)');
+  pgm.sql('ALTER TABLE albums ADD COLUMN cover VARCHAR(100)');
 };
 
 exports.down = (pgm) => {
