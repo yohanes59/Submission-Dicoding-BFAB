@@ -34,6 +34,7 @@ class AlbumsHandler {
     const album = await this._service.getAlbumById(id);
     const response = h.response({
       status: 'success',
+      message: 'Detail Album berhasil di panggil',
       data: {
         album,
       },

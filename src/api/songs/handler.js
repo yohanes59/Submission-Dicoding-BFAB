@@ -21,6 +21,7 @@ class SongsHandler {
 
     const response = h.response({
       status: 'success',
+      message: 'Lagu berhasil ditambah',
       data: {
         songId,
       },
@@ -36,6 +37,7 @@ class SongsHandler {
 
     const response = h.response({
       status: 'success',
+      message: 'Daftar Lagu berhasil dipanggil',
       data: {
         songs: songs.map((song) => ({
           id: song.id,
@@ -55,6 +57,7 @@ class SongsHandler {
 
     const response = h.response({
       status: 'success',
+      message: 'Lagu berhasil dicari',
       data: {
         song,
       },
